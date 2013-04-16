@@ -14,13 +14,13 @@ class HostedmodelsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Output> predict(Input request, String hostedModelName, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<Output> predict(Input request, core.String hostedModelName, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "hostedmodels/{hostedModelName}/predict";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (hostedModelName == null) paramErrors.add("hostedModelName is required");
     if (hostedModelName != null) urlParams["hostedModelName"] = hostedModelName;
     if (optParams != null) {
@@ -57,13 +57,13 @@ class TrainedmodelsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Analyze> analyze(String id, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<Analyze> analyze(core.String id, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "trainedmodels/{id}/analyze";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (id == null) paramErrors.add("id is required");
     if (id != null) urlParams["id"] = id;
     if (optParams != null) {
@@ -94,13 +94,13 @@ class TrainedmodelsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Map> delete(String id, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<core.Map> delete(core.String id, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "trainedmodels/{id}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (id == null) paramErrors.add("id is required");
     if (id != null) urlParams["id"] = id;
     if (optParams != null) {
@@ -131,13 +131,13 @@ class TrainedmodelsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Training> get(String id, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<Training> get(core.String id, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "trainedmodels/{id}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (id == null) paramErrors.add("id is required");
     if (id != null) urlParams["id"] = id;
     if (optParams != null) {
@@ -168,13 +168,13 @@ class TrainedmodelsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Training> insert(Training request, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<Training> insert(Training request, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "trainedmodels";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (optParams != null) {
       optParams.forEach((key, value) {
         if (value != null && queryParams[key] == null) {
@@ -206,13 +206,13 @@ class TrainedmodelsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<List> list({int maxResults, String pageToken, Map optParams}) {
-    var completer = new Completer();
+  async.Future<List> list({core.int maxResults, core.String pageToken, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "trainedmodels/list";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (maxResults != null) queryParams["maxResults"] = maxResults;
     if (pageToken != null) queryParams["pageToken"] = pageToken;
     if (optParams != null) {
@@ -245,13 +245,13 @@ class TrainedmodelsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Output> predict(Input request, String id, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<Output> predict(Input request, core.String id, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "trainedmodels/{id}/predict";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (id == null) paramErrors.add("id is required");
     if (id != null) urlParams["id"] = id;
     if (optParams != null) {
@@ -284,13 +284,13 @@ class TrainedmodelsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Training> update(Update request, String id, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<Training> update(Update request, core.String id, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "trainedmodels/{id}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (id == null) paramErrors.add("id is required");
     if (id != null) urlParams["id"] = id;
     if (optParams != null) {

@@ -4,10 +4,10 @@ part of prediction_v1_5_api_console;
 /** Lets you access a cloud hosted machine learning service that makes it easy to build smart apps */
 class Prediction extends ConsoleClient {
 
-  HostedmodelsResource _hostedmodels;
-  HostedmodelsResource get hostedmodels => _hostedmodels;
-  TrainedmodelsResource _trainedmodels;
-  TrainedmodelsResource get trainedmodels => _trainedmodels;
+  HostedmodelsResource_ _hostedmodels;
+  HostedmodelsResource_ get hostedmodels => _hostedmodels;
+  TrainedmodelsResource_ _trainedmodels;
+  TrainedmodelsResource_ get trainedmodels => _trainedmodels;
 
   /** OAuth Scope2: Manage your data and permissions in Google Cloud Storage */
   static const core.String DEVSTORAGE_FULL_CONTROL_SCOPE = "https://www.googleapis.com/auth/devstorage.full_control";
@@ -73,7 +73,7 @@ class Prediction extends ConsoleClient {
   Prediction([oauth2.OAuth2Console auth]) : super(auth) {
     basePath = "/prediction/v1.5/";
     rootUrl = "https://www.googleapis.com:443/";
-    _hostedmodels = new HostedmodelsResource(this);
-    _trainedmodels = new TrainedmodelsResource(this);
+    _hostedmodels = new HostedmodelsResource_(this);
+    _trainedmodels = new TrainedmodelsResource_(this);
   }
 }

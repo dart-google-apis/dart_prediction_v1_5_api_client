@@ -216,7 +216,7 @@ class AnalyzeDataDescriptionFeatures {
   AnalyzeDataDescriptionFeaturesCategorical categorical;
 
   /** The feature index. */
-  core.String index;
+  core.int index;
 
   /** Description of the numeric values of this feature. */
   AnalyzeDataDescriptionFeaturesNumeric numeric;
@@ -269,7 +269,7 @@ class AnalyzeDataDescriptionFeatures {
 class AnalyzeDataDescriptionFeaturesCategorical {
 
   /** Number of categorical values for this feature in the data. */
-  core.String count;
+  core.int count;
 
   /** List of all the categories for this feature in the data set. */
   core.List<AnalyzeDataDescriptionFeaturesCategoricalValues> values;
@@ -312,7 +312,7 @@ class AnalyzeDataDescriptionFeaturesCategorical {
 class AnalyzeDataDescriptionFeaturesCategoricalValues {
 
   /** Number of times this feature had this value. */
-  core.String count;
+  core.int count;
 
   /** The category name. */
   core.String value;
@@ -350,7 +350,7 @@ class AnalyzeDataDescriptionFeaturesCategoricalValues {
 class AnalyzeDataDescriptionFeaturesNumeric {
 
   /** Number of numeric values for this feature in the data set. */
-  core.String count;
+  core.int count;
 
   /** Mean of the numeric values of this feature in the data set. */
   core.num mean;
@@ -397,7 +397,7 @@ class AnalyzeDataDescriptionFeaturesNumeric {
 class AnalyzeDataDescriptionFeaturesText {
 
   /** Number of multiple-word text values for this feature. */
-  core.String count;
+  core.int count;
 
   /** Create new AnalyzeDataDescriptionFeaturesText from JSON data */
   AnalyzeDataDescriptionFeaturesText.fromJson(core.Map json) {
@@ -470,7 +470,7 @@ class AnalyzeDataDescriptionOutputFeature {
 class AnalyzeDataDescriptionOutputFeatureNumeric {
 
   /** Number of numeric output values in the data set. */
-  core.String count;
+  core.int count;
 
   /** Mean of the output values in the data set. */
   core.num mean;
@@ -516,7 +516,7 @@ class AnalyzeDataDescriptionOutputFeatureNumeric {
 class AnalyzeDataDescriptionOutputFeatureText {
 
   /** Number of times the output label occurred in the data set. */
-  core.String count;
+  core.int count;
 
   /** The output label. */
   core.String value;
@@ -958,10 +958,10 @@ class TrainingModelInfo {
   core.String modelType;
 
   /** Number of valid data instances used in the trained model. */
-  core.String numberInstances;
+  core.int numberInstances;
 
   /** Number of class labels in the trained model [Categorical models only]. */
-  core.String numberLabels;
+  core.int numberLabels;
 
   /** Create new TrainingModelInfo from JSON data */
   TrainingModelInfo.fromJson(core.Map json) {

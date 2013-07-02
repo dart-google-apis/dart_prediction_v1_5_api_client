@@ -15,7 +15,6 @@ class HostedmodelsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Output> predict(Input request, core.String hostedModelName, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "hostedmodels/{hostedModelName}/predict";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -32,16 +31,13 @@ class HostedmodelsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Output.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Output.fromJson(data));
   }
 }
 
@@ -58,7 +54,6 @@ class TrainedmodelsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Analyze> analyze(core.String id, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "trainedmodels/{id}/analyze";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -75,16 +70,13 @@ class TrainedmodelsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Analyze.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Analyze.fromJson(data));
   }
 
   /**
@@ -95,7 +87,6 @@ class TrainedmodelsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<core.Map> delete(core.String id, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "trainedmodels/{id}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -112,16 +103,12 @@ class TrainedmodelsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "DELETE", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(data))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response;
   }
 
   /**
@@ -132,7 +119,6 @@ class TrainedmodelsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Training> get(core.String id, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "trainedmodels/{id}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -149,16 +135,13 @@ class TrainedmodelsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Training.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Training.fromJson(data));
   }
 
   /**
@@ -169,7 +152,6 @@ class TrainedmodelsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Training> insert(Training request, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "trainedmodels";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -184,16 +166,13 @@ class TrainedmodelsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Training.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Training.fromJson(data));
   }
 
   /**
@@ -207,7 +186,6 @@ class TrainedmodelsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<List> list({core.int maxResults, core.String pageToken, core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "trainedmodels/list";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -224,16 +202,13 @@ class TrainedmodelsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new List.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new List.fromJson(data));
   }
 
   /**
@@ -246,7 +221,6 @@ class TrainedmodelsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Output> predict(Input request, core.String id, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "trainedmodels/{id}/predict";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -263,16 +237,13 @@ class TrainedmodelsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Output.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Output.fromJson(data));
   }
 
   /**
@@ -285,7 +256,6 @@ class TrainedmodelsResource_ extends Resource {
    * [optParams] - Additional query parameters
    */
   async.Future<Training> update(Update request, core.String id, {core.Map optParams}) {
-    var completer = new async.Completer();
     var url = "trainedmodels/{id}";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -302,16 +272,13 @@ class TrainedmodelsResource_ extends Resource {
     }
 
     if (!paramErrors.isEmpty) {
-      completer.completeError(new core.ArgumentError(paramErrors.join(" / ")));
-      return completer.future;
+      throw new core.ArgumentError(paramErrors.join(" / "));
     }
 
     var response;
     response = _client.request(url, "PUT", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
-    response
-      .then((data) => completer.complete(new Training.fromJson(data)))
-      .catchError((e) { completer.completeError(e); return true; });
-    return completer.future;
+    return response
+      .then((data) => new Training.fromJson(data));
   }
 }
 

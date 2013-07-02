@@ -230,7 +230,11 @@ class AnalyzeDataDescriptionFeatures {
       categorical = new AnalyzeDataDescriptionFeaturesCategorical.fromJson(json["categorical"]);
     }
     if (json.containsKey("index")) {
-      index = json["index"];
+      if(json["index"] is core.String){
+        index = core.int.parse(json["index"]);
+      }else{
+        index = json["index"];
+      }
     }
     if (json.containsKey("numeric")) {
       numeric = new AnalyzeDataDescriptionFeaturesNumeric.fromJson(json["numeric"]);
@@ -277,7 +281,11 @@ class AnalyzeDataDescriptionFeaturesCategorical {
   /** Create new AnalyzeDataDescriptionFeaturesCategorical from JSON data */
   AnalyzeDataDescriptionFeaturesCategorical.fromJson(core.Map json) {
     if (json.containsKey("count")) {
-      count = json["count"];
+      if(json["count"] is core.String){
+        count = core.int.parse(json["count"]);
+      }else{
+        count = json["count"];
+      }
     }
     if (json.containsKey("values")) {
       values = [];
@@ -320,7 +328,11 @@ class AnalyzeDataDescriptionFeaturesCategoricalValues {
   /** Create new AnalyzeDataDescriptionFeaturesCategoricalValues from JSON data */
   AnalyzeDataDescriptionFeaturesCategoricalValues.fromJson(core.Map json) {
     if (json.containsKey("count")) {
-      count = json["count"];
+      if(json["count"] is core.String){
+        count = core.int.parse(json["count"]);
+      }else{
+        count = json["count"];
+      }
     }
     if (json.containsKey("value")) {
       value = json["value"];
@@ -361,7 +373,11 @@ class AnalyzeDataDescriptionFeaturesNumeric {
   /** Create new AnalyzeDataDescriptionFeaturesNumeric from JSON data */
   AnalyzeDataDescriptionFeaturesNumeric.fromJson(core.Map json) {
     if (json.containsKey("count")) {
-      count = json["count"];
+      if(json["count"] is core.String){
+        count = core.int.parse(json["count"]);
+      }else{
+        count = json["count"];
+      }
     }
     if (json.containsKey("mean")) {
       mean = json["mean"];
@@ -402,7 +418,11 @@ class AnalyzeDataDescriptionFeaturesText {
   /** Create new AnalyzeDataDescriptionFeaturesText from JSON data */
   AnalyzeDataDescriptionFeaturesText.fromJson(core.Map json) {
     if (json.containsKey("count")) {
-      count = json["count"];
+      if(json["count"] is core.String){
+        count = core.int.parse(json["count"]);
+      }else{
+        count = json["count"];
+      }
     }
   }
 
@@ -481,7 +501,11 @@ class AnalyzeDataDescriptionOutputFeatureNumeric {
   /** Create new AnalyzeDataDescriptionOutputFeatureNumeric from JSON data */
   AnalyzeDataDescriptionOutputFeatureNumeric.fromJson(core.Map json) {
     if (json.containsKey("count")) {
-      count = json["count"];
+      if(json["count"] is core.String){
+        count = core.int.parse(json["count"]);
+      }else{
+        count = json["count"];
+      }
     }
     if (json.containsKey("mean")) {
       mean = json["mean"];
@@ -524,7 +548,11 @@ class AnalyzeDataDescriptionOutputFeatureText {
   /** Create new AnalyzeDataDescriptionOutputFeatureText from JSON data */
   AnalyzeDataDescriptionOutputFeatureText.fromJson(core.Map json) {
     if (json.containsKey("count")) {
-      count = json["count"];
+      if(json["count"] is core.String){
+        count = core.int.parse(json["count"]);
+      }else{
+        count = json["count"];
+      }
     }
     if (json.containsKey("value")) {
       value = json["value"];
@@ -978,10 +1006,18 @@ class TrainingModelInfo {
       modelType = json["modelType"];
     }
     if (json.containsKey("numberInstances")) {
-      numberInstances = json["numberInstances"];
+      if(json["numberInstances"] is core.String){
+        numberInstances = core.int.parse(json["numberInstances"]);
+      }else{
+        numberInstances = json["numberInstances"];
+      }
     }
     if (json.containsKey("numberLabels")) {
-      numberLabels = json["numberLabels"];
+      if(json["numberLabels"] is core.String){
+        numberLabels = core.int.parse(json["numberLabels"]);
+      }else{
+        numberLabels = json["numberLabels"];
+      }
     }
   }
 

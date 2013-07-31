@@ -1,4 +1,4 @@
-part of prediction_v1_5_api_client;
+part of prediction_v1_5_api;
 
 class Analyze {
 
@@ -6,7 +6,7 @@ class Analyze {
   AnalyzeDataDescription dataDescription;
 
   /** List of errors with the data. */
-  core.List<AnalyzeErrors> errors;
+  core.List<core.Map<core.String, core.String>> errors;
 
   /** The unique name for the predictive model. */
   core.String id;
@@ -26,10 +26,7 @@ class Analyze {
       dataDescription = new AnalyzeDataDescription.fromJson(json["dataDescription"]);
     }
     if (json.containsKey("errors")) {
-      errors = [];
-      json["errors"].forEach((item) {
-        errors.add(new AnalyzeErrors.fromJson(item));
-      });
+      errors = json["errors"].map((errorsItem) => _mapMap(errorsItem)).toList();
     }
     if (json.containsKey("id")) {
       id = json["id"];
@@ -53,10 +50,7 @@ class Analyze {
       output["dataDescription"] = dataDescription.toJson();
     }
     if (errors != null) {
-      output["errors"] = new core.List();
-      errors.forEach((item) {
-        output["errors"].add(item.toJson());
-      });
+      output["errors"] = errors.map((errorsItem) => _mapMap(errorsItem)).toList();
     }
     if (id != null) {
       output["id"] = id;
@@ -79,93 +73,6 @@ class Analyze {
 
 }
 
-/** Description of the model. */
-class AnalyzeModelDescription {
-
-  /** An output confusion matrix. This shows an estimate for how this model will do in predictions. This is first indexed by the true class label. For each true class label, this provides a pair {predicted_label, count}, where count is the estimated number of times the model will predict the predicted label given the true label. Will not output if more then 100 classes [Categorical models only]. */
-  AnalyzeModelDescriptionConfusionMatrix confusionMatrix;
-
-  /** A list of the confusion matrix row totals */
-  AnalyzeModelDescriptionConfusionMatrixRowTotals confusionMatrixRowTotals;
-
-  /** Basic information about the model. */
-  Training modelinfo;
-
-  /** Create new AnalyzeModelDescription from JSON data */
-  AnalyzeModelDescription.fromJson(core.Map json) {
-    if (json.containsKey("confusionMatrix")) {
-      confusionMatrix = new AnalyzeModelDescriptionConfusionMatrix.fromJson(json["confusionMatrix"]);
-    }
-    if (json.containsKey("confusionMatrixRowTotals")) {
-      confusionMatrixRowTotals = new AnalyzeModelDescriptionConfusionMatrixRowTotals.fromJson(json["confusionMatrixRowTotals"]);
-    }
-    if (json.containsKey("modelinfo")) {
-      modelinfo = new Training.fromJson(json["modelinfo"]);
-    }
-  }
-
-  /** Create JSON Object for AnalyzeModelDescription */
-  core.Map toJson() {
-    var output = new core.Map();
-
-    if (confusionMatrix != null) {
-      output["confusionMatrix"] = confusionMatrix.toJson();
-    }
-    if (confusionMatrixRowTotals != null) {
-      output["confusionMatrixRowTotals"] = confusionMatrixRowTotals.toJson();
-    }
-    if (modelinfo != null) {
-      output["modelinfo"] = modelinfo.toJson();
-    }
-
-    return output;
-  }
-
-  /** Return String representation of AnalyzeModelDescription */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
-/** An output confusion matrix. This shows an estimate for how this model will do in predictions. This is first indexed by the true class label. For each true class label, this provides a pair {predicted_label, count}, where count is the estimated number of times the model will predict the predicted label given the true label. Will not output if more then 100 classes [Categorical models only]. */
-class AnalyzeModelDescriptionConfusionMatrix {
-
-  /** Create new AnalyzeModelDescriptionConfusionMatrix from JSON data */
-  AnalyzeModelDescriptionConfusionMatrix.fromJson(core.Map json) {
-  }
-
-  /** Create JSON Object for AnalyzeModelDescriptionConfusionMatrix */
-  core.Map toJson() {
-    var output = new core.Map();
-
-
-    return output;
-  }
-
-  /** Return String representation of AnalyzeModelDescriptionConfusionMatrix */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
-/** A list of the confusion matrix row totals */
-class AnalyzeModelDescriptionConfusionMatrixRowTotals {
-
-  /** Create new AnalyzeModelDescriptionConfusionMatrixRowTotals from JSON data */
-  AnalyzeModelDescriptionConfusionMatrixRowTotals.fromJson(core.Map json) {
-  }
-
-  /** Create JSON Object for AnalyzeModelDescriptionConfusionMatrixRowTotals */
-  core.Map toJson() {
-    var output = new core.Map();
-
-
-    return output;
-  }
-
-  /** Return String representation of AnalyzeModelDescriptionConfusionMatrixRowTotals */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
 /** Description of the data the model was trained on. */
 class AnalyzeDataDescription {
 
@@ -178,10 +85,7 @@ class AnalyzeDataDescription {
   /** Create new AnalyzeDataDescription from JSON data */
   AnalyzeDataDescription.fromJson(core.Map json) {
     if (json.containsKey("features")) {
-      features = [];
-      json["features"].forEach((item) {
-        features.add(new AnalyzeDataDescriptionFeatures.fromJson(item));
-      });
+      features = json["features"].map((featuresItem) => new AnalyzeDataDescriptionFeatures.fromJson(featuresItem)).toList();
     }
     if (json.containsKey("outputFeature")) {
       outputFeature = new AnalyzeDataDescriptionOutputFeature.fromJson(json["outputFeature"]);
@@ -193,10 +97,7 @@ class AnalyzeDataDescription {
     var output = new core.Map();
 
     if (features != null) {
-      output["features"] = new core.List();
-      features.forEach((item) {
-        output["features"].add(item.toJson());
-      });
+      output["features"] = features.map((featuresItem) => featuresItem.toJson()).toList();
     }
     if (outputFeature != null) {
       output["outputFeature"] = outputFeature.toJson();
@@ -230,11 +131,7 @@ class AnalyzeDataDescriptionFeatures {
       categorical = new AnalyzeDataDescriptionFeaturesCategorical.fromJson(json["categorical"]);
     }
     if (json.containsKey("index")) {
-      if(json["index"] is core.String){
-        index = core.int.parse(json["index"]);
-      }else{
-        index = json["index"];
-      }
+      index = (json["index"] is core.String) ? core.int.parse(json["index"]) : json["index"];
     }
     if (json.containsKey("numeric")) {
       numeric = new AnalyzeDataDescriptionFeaturesNumeric.fromJson(json["numeric"]);
@@ -281,17 +178,10 @@ class AnalyzeDataDescriptionFeaturesCategorical {
   /** Create new AnalyzeDataDescriptionFeaturesCategorical from JSON data */
   AnalyzeDataDescriptionFeaturesCategorical.fromJson(core.Map json) {
     if (json.containsKey("count")) {
-      if(json["count"] is core.String){
-        count = core.int.parse(json["count"]);
-      }else{
-        count = json["count"];
-      }
+      count = (json["count"] is core.String) ? core.int.parse(json["count"]) : json["count"];
     }
     if (json.containsKey("values")) {
-      values = [];
-      json["values"].forEach((item) {
-        values.add(new AnalyzeDataDescriptionFeaturesCategoricalValues.fromJson(item));
-      });
+      values = json["values"].map((valuesItem) => new AnalyzeDataDescriptionFeaturesCategoricalValues.fromJson(valuesItem)).toList();
     }
   }
 
@@ -303,10 +193,7 @@ class AnalyzeDataDescriptionFeaturesCategorical {
       output["count"] = count;
     }
     if (values != null) {
-      output["values"] = new core.List();
-      values.forEach((item) {
-        output["values"].add(item.toJson());
-      });
+      output["values"] = values.map((valuesItem) => valuesItem.toJson()).toList();
     }
 
     return output;
@@ -328,11 +215,7 @@ class AnalyzeDataDescriptionFeaturesCategoricalValues {
   /** Create new AnalyzeDataDescriptionFeaturesCategoricalValues from JSON data */
   AnalyzeDataDescriptionFeaturesCategoricalValues.fromJson(core.Map json) {
     if (json.containsKey("count")) {
-      if(json["count"] is core.String){
-        count = core.int.parse(json["count"]);
-      }else{
-        count = json["count"];
-      }
+      count = (json["count"] is core.String) ? core.int.parse(json["count"]) : json["count"];
     }
     if (json.containsKey("value")) {
       value = json["value"];
@@ -373,11 +256,7 @@ class AnalyzeDataDescriptionFeaturesNumeric {
   /** Create new AnalyzeDataDescriptionFeaturesNumeric from JSON data */
   AnalyzeDataDescriptionFeaturesNumeric.fromJson(core.Map json) {
     if (json.containsKey("count")) {
-      if(json["count"] is core.String){
-        count = core.int.parse(json["count"]);
-      }else{
-        count = json["count"];
-      }
+      count = (json["count"] is core.String) ? core.int.parse(json["count"]) : json["count"];
     }
     if (json.containsKey("mean")) {
       mean = json["mean"];
@@ -418,11 +297,7 @@ class AnalyzeDataDescriptionFeaturesText {
   /** Create new AnalyzeDataDescriptionFeaturesText from JSON data */
   AnalyzeDataDescriptionFeaturesText.fromJson(core.Map json) {
     if (json.containsKey("count")) {
-      if(json["count"] is core.String){
-        count = core.int.parse(json["count"]);
-      }else{
-        count = json["count"];
-      }
+      count = (json["count"] is core.String) ? core.int.parse(json["count"]) : json["count"];
     }
   }
 
@@ -457,10 +332,7 @@ class AnalyzeDataDescriptionOutputFeature {
       numeric = new AnalyzeDataDescriptionOutputFeatureNumeric.fromJson(json["numeric"]);
     }
     if (json.containsKey("text")) {
-      text = [];
-      json["text"].forEach((item) {
-        text.add(new AnalyzeDataDescriptionOutputFeatureText.fromJson(item));
-      });
+      text = json["text"].map((textItem) => new AnalyzeDataDescriptionOutputFeatureText.fromJson(textItem)).toList();
     }
   }
 
@@ -472,10 +344,7 @@ class AnalyzeDataDescriptionOutputFeature {
       output["numeric"] = numeric.toJson();
     }
     if (text != null) {
-      output["text"] = new core.List();
-      text.forEach((item) {
-        output["text"].add(item.toJson());
-      });
+      output["text"] = text.map((textItem) => textItem.toJson()).toList();
     }
 
     return output;
@@ -501,11 +370,7 @@ class AnalyzeDataDescriptionOutputFeatureNumeric {
   /** Create new AnalyzeDataDescriptionOutputFeatureNumeric from JSON data */
   AnalyzeDataDescriptionOutputFeatureNumeric.fromJson(core.Map json) {
     if (json.containsKey("count")) {
-      if(json["count"] is core.String){
-        count = core.int.parse(json["count"]);
-      }else{
-        count = json["count"];
-      }
+      count = (json["count"] is core.String) ? core.int.parse(json["count"]) : json["count"];
     }
     if (json.containsKey("mean")) {
       mean = json["mean"];
@@ -548,11 +413,7 @@ class AnalyzeDataDescriptionOutputFeatureText {
   /** Create new AnalyzeDataDescriptionOutputFeatureText from JSON data */
   AnalyzeDataDescriptionOutputFeatureText.fromJson(core.Map json) {
     if (json.containsKey("count")) {
-      if(json["count"] is core.String){
-        count = core.int.parse(json["count"]);
-      }else{
-        count = json["count"];
-      }
+      count = (json["count"] is core.String) ? core.int.parse(json["count"]) : json["count"];
     }
     if (json.containsKey("value")) {
       value = json["value"];
@@ -578,21 +439,49 @@ class AnalyzeDataDescriptionOutputFeatureText {
 
 }
 
-class AnalyzeErrors {
+/** Description of the model. */
+class AnalyzeModelDescription {
 
-  /** Create new AnalyzeErrors from JSON data */
-  AnalyzeErrors.fromJson(core.Map json) {
+  /** An output confusion matrix. This shows an estimate for how this model will do in predictions. This is first indexed by the true class label. For each true class label, this provides a pair {predicted_label, count}, where count is the estimated number of times the model will predict the predicted label given the true label. Will not output if more then 100 classes [Categorical models only]. */
+  core.Map<core.String, core.Map<core.String, core.num>> confusionMatrix;
+
+  /** A list of the confusion matrix row totals */
+  core.Map<core.String, core.num> confusionMatrixRowTotals;
+
+  /** Basic information about the model. */
+  Training modelinfo;
+
+  /** Create new AnalyzeModelDescription from JSON data */
+  AnalyzeModelDescription.fromJson(core.Map json) {
+    if (json.containsKey("confusionMatrix")) {
+      confusionMatrix = _mapMap(json["confusionMatrix"], (confusionMatrixItem) => _mapMap(confusionMatrixItem));
+    }
+    if (json.containsKey("confusionMatrixRowTotals")) {
+      confusionMatrixRowTotals = _mapMap(json["confusionMatrixRowTotals"]);
+    }
+    if (json.containsKey("modelinfo")) {
+      modelinfo = new Training.fromJson(json["modelinfo"]);
+    }
   }
 
-  /** Create JSON Object for AnalyzeErrors */
+  /** Create JSON Object for AnalyzeModelDescription */
   core.Map toJson() {
     var output = new core.Map();
 
+    if (confusionMatrix != null) {
+      output["confusionMatrix"] = _mapMap(confusionMatrix, (confusionMatrixItem) => _mapMap(confusionMatrixItem));
+    }
+    if (confusionMatrixRowTotals != null) {
+      output["confusionMatrixRowTotals"] = _mapMap(confusionMatrixRowTotals);
+    }
+    if (modelinfo != null) {
+      output["modelinfo"] = modelinfo.toJson();
+    }
 
     return output;
   }
 
-  /** Return String representation of AnalyzeErrors */
+  /** Return String representation of AnalyzeModelDescription */
   core.String toString() => JSON.stringify(this.toJson());
 
 }
@@ -628,14 +517,23 @@ class Input {
 /** Input to the model for a prediction */
 class InputInput {
 
+  /** A list of input features, these can be strings or doubles. */
+  core.List<core.Object> csvInstance;
+
   /** Create new InputInput from JSON data */
   InputInput.fromJson(core.Map json) {
+    if (json.containsKey("csvInstance")) {
+      csvInstance = json["csvInstance"].toList();
+    }
   }
 
   /** Create JSON Object for InputInput */
   core.Map toJson() {
     var output = new core.Map();
 
+    if (csvInstance != null) {
+      output["csvInstance"] = csvInstance.toList();
+    }
 
     return output;
   }
@@ -662,10 +560,7 @@ class List {
   /** Create new List from JSON data */
   List.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Training.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Training.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -683,10 +578,7 @@ class List {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -738,10 +630,7 @@ class Output {
       outputLabel = json["outputLabel"];
     }
     if (json.containsKey("outputMulti")) {
-      outputMulti = [];
-      json["outputMulti"].forEach((item) {
-        outputMulti.add(new OutputOutputMulti.fromJson(item));
-      });
+      outputMulti = json["outputMulti"].map((outputMultiItem) => new OutputOutputMulti.fromJson(outputMultiItem)).toList();
     }
     if (json.containsKey("outputValue")) {
       outputValue = json["outputValue"];
@@ -765,10 +654,7 @@ class Output {
       output["outputLabel"] = outputLabel;
     }
     if (outputMulti != null) {
-      output["outputMulti"] = new core.List();
-      outputMulti.forEach((item) {
-        output["outputMulti"].add(item.toJson());
-      });
+      output["outputMulti"] = outputMulti.map((outputMultiItem) => outputMultiItem.toJson()).toList();
     }
     if (outputValue != null) {
       output["outputValue"] = outputValue;
@@ -861,7 +747,7 @@ class Training {
   core.String trainingStatus;
 
   /** A class weighting function, which allows the importance weights for class labels to be specified [Categorical models only]. */
-  core.List<TrainingUtility> utility;
+  core.List<core.Map<core.String, core.num>> utility;
 
   /** Create new Training from JSON data */
   Training.fromJson(core.Map json) {
@@ -896,19 +782,13 @@ class Training {
       trainingComplete = json["trainingComplete"];
     }
     if (json.containsKey("trainingInstances")) {
-      trainingInstances = [];
-      json["trainingInstances"].forEach((item) {
-        trainingInstances.add(new TrainingTrainingInstances.fromJson(item));
-      });
+      trainingInstances = json["trainingInstances"].map((trainingInstancesItem) => new TrainingTrainingInstances.fromJson(trainingInstancesItem)).toList();
     }
     if (json.containsKey("trainingStatus")) {
       trainingStatus = json["trainingStatus"];
     }
     if (json.containsKey("utility")) {
-      utility = [];
-      json["utility"].forEach((item) {
-        utility.add(new TrainingUtility.fromJson(item));
-      });
+      utility = json["utility"].map((utilityItem) => _mapMap(utilityItem)).toList();
     }
   }
 
@@ -947,19 +827,13 @@ class Training {
       output["trainingComplete"] = trainingComplete;
     }
     if (trainingInstances != null) {
-      output["trainingInstances"] = new core.List();
-      trainingInstances.forEach((item) {
-        output["trainingInstances"].add(item.toJson());
-      });
+      output["trainingInstances"] = trainingInstances.map((trainingInstancesItem) => trainingInstancesItem.toJson()).toList();
     }
     if (trainingStatus != null) {
       output["trainingStatus"] = trainingStatus;
     }
     if (utility != null) {
-      output["utility"] = new core.List();
-      utility.forEach((item) {
-        output["utility"].add(item.toJson());
-      });
+      output["utility"] = utility.map((utilityItem) => _mapMap(utilityItem)).toList();
     }
 
     return output;
@@ -1006,18 +880,10 @@ class TrainingModelInfo {
       modelType = json["modelType"];
     }
     if (json.containsKey("numberInstances")) {
-      if(json["numberInstances"] is core.String){
-        numberInstances = core.int.parse(json["numberInstances"]);
-      }else{
-        numberInstances = json["numberInstances"];
-      }
+      numberInstances = (json["numberInstances"] is core.String) ? core.int.parse(json["numberInstances"]) : json["numberInstances"];
     }
     if (json.containsKey("numberLabels")) {
-      if(json["numberLabels"] is core.String){
-        numberLabels = core.int.parse(json["numberLabels"]);
-      }else{
-        numberLabels = json["numberLabels"];
-      }
+      numberLabels = (json["numberLabels"] is core.String) ? core.int.parse(json["numberLabels"]) : json["numberLabels"];
     }
   }
 
@@ -1052,33 +918,19 @@ class TrainingModelInfo {
 
 }
 
-/** Class label (string). */
-class TrainingUtility {
-
-  /** Create new TrainingUtility from JSON data */
-  TrainingUtility.fromJson(core.Map json) {
-  }
-
-  /** Create JSON Object for TrainingUtility */
-  core.Map toJson() {
-    var output = new core.Map();
-
-
-    return output;
-  }
-
-  /** Return String representation of TrainingUtility */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
 class TrainingTrainingInstances {
+
+  /** The input features for this instance */
+  core.List<core.Object> csvInstance;
 
   /** The generic output value - could be regression or class label */
   core.String output;
 
   /** Create new TrainingTrainingInstances from JSON data */
   TrainingTrainingInstances.fromJson(core.Map json) {
+    if (json.containsKey("csvInstance")) {
+      csvInstance = json["csvInstance"].toList();
+    }
     if (json.containsKey("output")) {
       output = json["output"];
     }
@@ -1088,6 +940,9 @@ class TrainingTrainingInstances {
   core.Map toJson() {
     var output = new core.Map();
 
+    if (csvInstance != null) {
+      output["csvInstance"] = csvInstance.toList();
+    }
     if (output != null) {
       output["output"] = output;
     }
@@ -1102,6 +957,9 @@ class TrainingTrainingInstances {
 
 class Update {
 
+  /** The input features for this instance */
+  core.List<core.Object> csvInstance;
+
   /** The class label of this instance */
   core.String label;
 
@@ -1110,6 +968,9 @@ class Update {
 
   /** Create new Update from JSON data */
   Update.fromJson(core.Map json) {
+    if (json.containsKey("csvInstance")) {
+      csvInstance = json["csvInstance"].toList();
+    }
     if (json.containsKey("label")) {
       label = json["label"];
     }
@@ -1122,6 +983,9 @@ class Update {
   core.Map toJson() {
     var output = new core.Map();
 
+    if (csvInstance != null) {
+      output["csvInstance"] = csvInstance.toList();
+    }
     if (label != null) {
       output["label"] = label;
     }
@@ -1137,3 +1001,16 @@ class Update {
 
 }
 
+core.Map _mapMap(core.Map source, [core.Object convert(core.Object source) = null]) {
+  assert(source != null);
+  var result = new dart_collection.LinkedHashMap();
+  source.forEach((core.String key, value) {
+    assert(key != null);
+    if(convert == null) {
+      result[key] = value;
+    } else {
+      result[key] = convert(value);
+    }
+  });
+  return result;
+}
